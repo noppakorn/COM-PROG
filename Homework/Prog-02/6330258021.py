@@ -47,7 +47,8 @@ def update_v(x1, y1, r1, v1x, v1y,
              x2, y2, r2, v2x, v2y):
     m1,m2 = r1**2,r2**2
     theta1,theta2 = math.atan2(v1y,v1x),math.atan2(v2y,v2x)
-    v1,v2 = v1y/math.sin(theta1),v2y/math.sin(theta2)
+    v1 = math.sqrt(v1x**2+v1y**2)
+    v2 = math.sqrt(v2x**2+v2y**2)
     phi = math.atan2((y2-y1),(x2-x1))
     v1_x = ((((v1*math.cos(theta1-phi)*(m1-m2)) + (2*m2*v2*math.cos(theta2-phi)))/(m1+m2)) * math.cos(phi)) + (v1*math.sin(theta1-phi)*math.cos(phi+math.pi/2))
     v1_y = ((((v1*math.cos(theta1-phi)*(m1-m2)) + (2*m2*v2*math.cos(theta2-phi)))/(m1+m2)) * math.sin(phi)) + (v1*math.sin(theta1-phi)*math.sin(phi+math.pi/2))
@@ -83,7 +84,7 @@ def total_Ek():
 def animate(i):
     for i in range(len(balls)):
         move(balls[i])
-    print(total_Ek())        
+    #print(total_Ek())        
     for i in range(len(balls)):
         for j in range(i+1, len(balls)):
             update_v_if_collide(balls[i], balls[j])

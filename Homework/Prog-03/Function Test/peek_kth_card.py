@@ -5,3 +5,4 @@ def peek_kth_card(cards, k):
 
 print(peek_kth_card("|2H||4S||TD||AC|",2)) 
 assert peek_kth_card("|2H||4S||TD||AC|",2) == "|4S|"
+assert peek_kth_card("|2H|",1) == "|2H|"

@@ -1,0 +1,6 @@
+x = int(input())
+if x > 0 : print('positive')
+elif x < 0 : print('negative')
+elif x == 0 : print('zero')
+if x%2 == 0 : print('even')
+elif x%2 == 1 : print('odd')

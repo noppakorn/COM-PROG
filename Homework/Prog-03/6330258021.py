@@ -100,7 +100,7 @@ def remove_kth_card(cards, k):
     return new_cards
 #---------------------------------------
 def deal_n_cards(deck, n):
-    cards = '|'.join(deck.split('|')[:2*n-1])
+    cards = '|'.join(deck.split('|')[:2*n+1])
     new_deck = '|'.join(deck.split('|')[2*n:])
 
     return cards, new_deck
@@ -110,17 +110,19 @@ def cut(deck, m):
 
     return new_deck
 #---------------------------------------
-def shuffle(deck):
-
-
+def shuffle(deck) :
+    ds = deck.split('|')[1::2]
+    n = len(ds)
+    ldeck = ['']*n
+    ldeck[::2],ldeck[1::2] = ds[:(n//2)+(n%2)],ds[(n//2)+(n%2):]
+    new_deck = '|' + '||'.join(ldeck) + '|'
 
     return new_deck
 #---------------------------------------
 def show_table_cards(cards, m):
-    n = len(cards.split('|')[1::2])
-    table = 'Table:' + '....'*min(max(0,n-m),1) + '|'.join(cards.split('|')[-2*m-1:])
+    table = 'Table: ' + '....'*min(max(0,len(cards.split('|')[1::2])-m),1) + '|'.join(cards.split('|')[-2*m-1:])
     print('-'*len(table))
     print(table)
     print('-'*len(table))
-#-----------------------------------------    
+# -----------------------------------------    
 play(51)

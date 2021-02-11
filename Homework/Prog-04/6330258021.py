@@ -9,8 +9,8 @@ LOSING_MSG = "Sorry! You just lost it."
 
 code = ''.join(random.sample('ABCDEF', 4))
 
-print('Please guess the puzzle codel using')
-print('the four distinct codel characters from [A to F]:')
+print('Please guess the puzzle code using')
+print('the four distinct code characters from [A to F]:')
 
 #---------------------------------------------------
 codel = list(code)

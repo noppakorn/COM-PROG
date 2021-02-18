@@ -19,13 +19,30 @@ def calc(num1,op,num2) :
     elif op == '-' : return num1-num2
     elif op == '*' : return num1*num2
     elif op == '/' and num2 != 0 : return num1/num2
-    elif op == '/' and num2 == 0 : return 0
+    elif op == '/' and num2 == 0 : return float('nan')
 #---------------------------------------------------------
 nums = input('Enter 4 integers: ')
-cases = generate_all_combinations( [int(i) for i in nums[::2]],  '+-*/' )
+cases = generate_all_combinations( [int(i) for i in nums.split()],  '+-*/' )
+w = False
 for i in cases :
-    out1 = calc(calc(calc(i[0],i[1],i[2]),i[3],i[4]),i[5],i[6])
-    out2 = calc(calc(i[0],i[1],calc(i[2],i[3],i[4])),i[5],i[6])
-    out3 = calc(calc(i[0],i[1],i[2]),i[3],calc(i[4],i[5],i[6]))
-    out4 = calc(i[0],i[1],calc(calc(i[2],i[3],i[4]),i[5],i[6]))
-    out5 = calc(i[0],i[1],calc(i[2],i[3],calc(i[4],i[5],i[6])))
+    if calc(calc(calc(i[0],i[1],i[2]),i[3],i[4]),i[5],i[6]) == 24 :
+        print('(','(',i[0],i[1],i[2],')',i[3],i[4],')',i[5],i[6],'=',24)
+        w = True
+        break
+    if calc(calc(i[0],i[1],calc(i[2],i[3],i[4])),i[5],i[6]) == 24 :
+        print('(',i[0],i[1],'(',i[2],i[3],i[4],')',')',i[5],i[6],'=',24)                
+        w = True
+        break
+    if calc(calc(i[0],i[1],i[2]),i[3],calc(i[4],i[5],i[6])) == 24 :
+        print('(',i[0],i[1],i[2],')',i[3],'(',i[4],i[5],i[6],')','=',24)
+        w = True
+        break
+    if calc(i[0],i[1],calc(calc(i[2],i[3],i[4]),i[5],i[6])) == 24 :
+        print(i[0],i[1],'(','(',i[2],i[3],i[4],')',i[5],i[6],')','=',24)
+        w = True
+        break
+    if calc(i[0],i[1],calc(i[2],i[3],calc(i[4],i[5],i[6]))) == 24 :
+        print(i[0],i[1],'(',i[2],i[3],'(',i[4],i[5],i[6],')',')','=',24)
+        w = True
+        break
+if not w : print('No Solutions')

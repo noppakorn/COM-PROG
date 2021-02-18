@@ -1,0 +1,10 @@
+for i in range(4) : 
+    i = input()
+    if i == 'Sunday' : print('Red')
+    elif i == 'Monday' : print('Yellow')
+    elif i == 'Tuesday' : print('Pink')
+    elif i == 'Wednesday' : print('Green')
+    elif i == 'Thursday' : print('Orange')
+    elif i == 'Friday' : print('Blue')
+    elif i == 'Saturday' : print('Purple')
+    else : print('Invalid day')

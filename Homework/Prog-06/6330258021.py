@@ -77,13 +77,13 @@ def top_n_similarity(norm_tweets, norm_query, n):
 
 def show_tweet(tweet_id, tweet_content, jc_coef, print_width):
     print('\n#'+str(tweet_id),'('+str(round(jc_coef,2))+')')
-    s = [' ']
+    s = []
     for i in tweet_content.split(' ') :
         n = len(' '.join(s))
         if n+len(i)+1 <= print_width : s.append(i)
         if n+len(i)+1 > print_width : 
-            print(' '.join(s))
-            s = [' ',i]
-    print(' '.join(s))
+            print(' ',' '.join(s).strip())
+            s = [i]
+    print(' ',' '.join(s).strip())
 #--------------------------------------------
 main()

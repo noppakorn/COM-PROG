@@ -9,26 +9,23 @@ def jaccard(words_1, words_2):
     return jaccard_coef
 
 def top_n_similarity(norm_tweets, norm_query, n):
-    top_n = []
+    top_n,l,li,jl,c = [],[],[],[],0
     for i in range(len(norm_tweets)) :
         jac = jaccard(norm_tweets[i],norm_query)
         if jac > 0 : top_n.append([jac,i])
-    top_n.sort()
-    for i in top_n : i[0],i[1] = i[1],i[0]
-    top_n = top_n[::-1]
-    c,l,li,jl = 0,[],[],[]
+    top_n = sorted(top_n)[::-1]
     for i in range(len(top_n)) :
-        if top_n[i][1] == c : li.append(top_n[i][0])
+        if top_n[i][0] == c : li.append(top_n[i][1])
         else : 
             if len(li) != 0 : l.append(sorted(li))
-            li = []
-            c = top_n[i][1]
+            li = [top_n[i][1]]
+            c = top_n[i][0]
             jl.append(c)
-            li.append(top_n[i][0])
     l.append(sorted(li))
     top_n = []
     for i in range(len(jl)) :
         for j in l[i] : top_n.append([j,jl[i]])
+    top_n = top_n[:n]
     return top_n
 
 

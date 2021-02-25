@@ -68,9 +68,9 @@ def top_n_similarity(norm_tweets, norm_query, n):
         if top_n[i][0] == c : li.append(top_n[i][1])
         else : 
             if len(li) != 0 : l.append(sorted(li))
+            li = [top_n[i][1]]
             c = top_n[i][0]
             jl.append(c)
-            li = [top_n[i][1]]
     l.append(sorted(li))
     top_n = []
     for i in range(len(jl)) :

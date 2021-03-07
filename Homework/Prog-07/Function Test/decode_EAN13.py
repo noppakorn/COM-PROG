@@ -52,15 +52,18 @@ def encode_EAN13(digits):
 def decode_EAN13(codes):
     if len(codes) != 95 : return ''
     g1,g2 = codes[3:45],codes[50:-3]
-    if patterns_of(g1) == '' : g1,g2 = g2[::-1],g1[::-1]
+    if patterns_of(g1[::-1]) == 'RRRRRR' : g1,g2 = g2[::-1],g1[::-1]
     digits =  digits_of(g1) + digits_of(g2)
     if len(digits) != 12 : return ''
     digits = str(enct.index(patterns_of(g1))) + digits
     if check_digit(digits[:-1]) != digits[-1] : return ''
     return digits
 
+#print(patterns_of('0010011'[::-1]))
+#c = '10100100110011001010011100110110010111001001101010111001010111001001110110011011101001101100101'
+#print(decode_EAN13(c))
+#print('3210292045192')
+#c = '10111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111101'
+#print(decode_EAN13(c))
 c = '10100100110011001010011100110110010111001001101010111001010111001001110110011011101001101100101'
-print(decode_EAN13(c))
-print('3210292045192')
-c = '10111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111101'
-print(decode_EAN13(c))
+print(decode_EAN13(c[::-1]))

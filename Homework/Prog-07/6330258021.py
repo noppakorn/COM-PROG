@@ -75,7 +75,7 @@ def encode_EAN13(digits):
     return '101' + codes_of(digits[1:7],enct[int(digits[0])]) + '01010' + codes_of(digits[7:],'RRRRRR') + '101'
 
 def decode_EAN13(codes):
-    if len(codes) != 95 : return ''
+    if len(codes) != 95 or codes[:3] != '101' or codes[-3:] != '101' or codes[45:50] != '01010': return ''
     g1,g2 = codes[3:45],codes[50:-3]
     if patterns_of(g1[::-1]) == 'RRRRRR' : g1,g2 = g2[::-1],g1[::-1]
     digits =  digits_of(g1) + digits_of(g2)

@@ -1,0 +1,1 @@
+print('\n ZWF zeQ= =\n'.strip().upper().lower())

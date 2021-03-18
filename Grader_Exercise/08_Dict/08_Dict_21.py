@@ -1,5 +1,7 @@
+import string
 d = {}
 for i in input().lower() :
+    if i not in string.ascii_lowercase : continue
     if i in d.keys() : d[i] += 1
     else : d[i] = 1
 l = []

@@ -26,6 +26,7 @@ lines = readlines(file_name)
 cc,ca,words = 0,0,''
 for line in lines : 
     cc += len(line)
+    words += ' '
     for c in line :
         if c.isalnum() : 
             words += c

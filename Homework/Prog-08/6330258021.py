@@ -3,10 +3,10 @@
 
 def readlines(fn) :
     fin = open(fn,'r')
-    lines,line = [],fin.readline().strip()
+    lines,line = [],fin.readline().strip('\n')
     while len(line) != 0 :
-        lines.append(line.strip())
-        line = fin.readline()        
+        lines.append(line.strip('\n'))
+        line = fin.readline() 
     fin.close()
     return lines
 
@@ -32,7 +32,11 @@ for line in lines :
             words += c
             ca += 1
         else : words += ' '
+print('char count = %d' % cc) 
+print('alphanumeric count = %d' % ca)
+print('line count = %d' % len(lines))
 words,uwords,cwords,stopwords = words.split(),[],[],[]
+print('word count = %d' % len(words))
 for i in readlines('stopwords.txt') : stopwords += i.split()
 for word in words :
     word = word.lower()
@@ -44,8 +48,4 @@ for word in words :
     else : cwords[uwords.index(word)] += 1
 bow = []
 for i in range(len(uwords)) : bow.append([uwords[i],cwords[i]])
-print('char count = %d' % cc) 
-print('alphanumeric count = %d' % ca)
-print('line count = %d' % len(lines))
-print('word count = %d' % len(words))
 print('BoW = %s' % sorted(bow))

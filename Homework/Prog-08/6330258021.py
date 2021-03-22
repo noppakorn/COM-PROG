@@ -37,7 +37,7 @@ print('alphanumeric count = %d' % ca)
 print('line count = %d' % len(lines))
 words,uwords,cwords,stopwords = words.split(),[],[],[]
 print('word count = %d' % len(words))
-for i in readlines('stopwords.txt') : stopwords += i.split()
+for i in readlines('stopwords.txt') : stopwords += i.lower().split()
 for word in words :
     word = word.lower()
     if word in stopwords  : continue

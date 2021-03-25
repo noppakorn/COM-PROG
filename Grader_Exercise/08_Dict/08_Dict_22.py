@@ -5,13 +5,18 @@ for i in range(int(input())) :
 cd = {}
 for i in range(int(input())):
     x = input().split()
-    if x[0] in d.keys() :
-        if x[0] in cd.keys() : cd[x[0]] += int(x[1])*d[x[0]]
+    if x[0] in d :
+        if x[0] in cd : cd[x[0]] += int(x[1])*d[x[0]]
         else : cd[x[0]] = int(x[1])*d[x[0]]
 if len(cd) == 0 : print('No ice cream sales')
 else : 
-    print('Total ice cream sales: %.1f' % sum(cd.values()))
+    su = 0
+    for i in cd : su += cd[i]
+    print('Total ice cream sales: %.1f' % su)
     top = []
-    for key,values in cd.items() :
-        if values == max(cd.values()) : top.append(key)
+    ma = 0
+    for key in cd :
+        if cd[key] > ma : ma = cd[key]
+    for key in cd :
+        if cd[key] == ma : top.append(key)
     print('Top sales: %s ' % ', '.join(sorted(top)))

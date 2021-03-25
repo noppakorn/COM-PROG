@@ -148,28 +148,42 @@ def main():
     if len(names) > 0: plot_map_info(stations, names, date_time)
 # --------------------------------------------------
 #
+def reformat(s) : return s.lower().replace(' ','')
 def approx_match(stations, name):
-    pass
-
+    l = []
+    for i in stations :
+        if reformat(name) in reformat(i) : l.append(i)
+    return l
 
 def top_k_min_temp_stations(stations, K):
-    pass
-
+    l,out = [],[]
+    for i in stations : l.append([stations[i]['temp'],i])
+    for i in sorted(l)[:K] : out.append(i[1])
+    return out
 
 def top_k_max_temp_stations(stations, K):
-    pass
-
+    l,out = [],[]
+    for i in stations : l.append([-stations[i]['temp'],i])
+    for i in sorted(l)[:K] : out.append(i[1])
+    return out
 
 def peak_stations(stations):
-    pass
-
+    lat,lon = [],[]
+    for i in stations : 
+        lat.append([stations[i]['lat'],i])
+        lon.append([stations[i]['long'],i])
+    return [min(lat)[1],max(lat)[1],min(lon)[1],max(lon)[1]]
 
 def k_nearby_stations(stations, main_station, K):
-    pass
-
+    dfm,out = [],[]
+    for i in stations : dfm.append([distance(stations[main_station]['lat'],stations[main_station]['long'],stations[i]['lat'],stations[i]['long']),i])
+    for i in sorted(dfm)[1:K+1] : out.append(i[1])
+    return out
 
 def average_temp(stations, names):
-    pass
+    temp = []
+    for i in names : temp.append(stations[i]['temp'])
+    return sum(temp)/len(temp)
 
 # --------------------------------------------------
 main()

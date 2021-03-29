@@ -17,12 +17,12 @@ stations = {
     'e I e I z A HaHA BUAK' : {
         'lat':  21,
         'long': 230,
-        'temp': 25.5,
+        'temp': 26,
     },
     'meenmeen' : {
         'lat':  100,
         'long': 200,
-        'temp': 29.5,
+        'temp': 28,
     },
     'akkkkmeen' : {
         'lat':  31,
@@ -46,12 +46,13 @@ testcases = [
     "assert top_k_max_temp_stations(stations,3) == ['EIEI', 'akkkkmeen', 'meenmeen']",
     "assert top_k_min_temp_stations(stations,2) == ['BON HEIR RAI Buak Buak', 'e I e I z A HaHA BUAK']",
     "assert top_k_min_temp_stations(stations,4) == ['BON HEIR RAI Buak Buak', 'e I e I z A HaHA BUAK', 'Akkkkmeen2', 'MAE MUENG SI haha']",
-    "assert peak_stations(stations) == ['BON HEIR RAI Buak Buak', 'meenmeen', 'EIEI', 'akkkkmeen']"
-    
+    "assert peak_stations(stations) == ['BON HEIR RAI Buak Buak', 'meenmeen', 'EIEI', 'akkkkmeen']",
+    "assert average_temp(stations,['BON HEIR RAI Buak Buak','MAE MUENG SI haha','meenmeen','e I e I z A HaHA BUAK']) == 26.75",
     ]
-print('----------------------------------------------------------------------------------------------------------------')
-print('Case 0-5: approx_match Case 6-7: top_k_max_temp_stations Case 7-8: top_k_min_temp_stations Case 9: peak_stations')
-print('----------------------------------------------------------------------------------------------------------------')
+print('------------------------------------------------------------------------------------------')
+print('Case 0-4: approx_match Case 5-7: top_k_max_temp_stations Case 7-8: top_k_min_temp_stations')
+print('Case 9: peak_stations Case 10: average_temp')
+print('------------------------------------------------------------------------------------------')
 d,f = {},{}
 for i in range(len(testcases)) :
     try : 

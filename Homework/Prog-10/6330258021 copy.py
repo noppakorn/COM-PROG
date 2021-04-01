@@ -83,6 +83,13 @@ def get_embedded_text_from_image(file_in):
         cc = bits_to_int(''.join([str(i%2) for i in imgcf[16:32]]))
         return ''.join([bits_to_char(''.join([str(j%2) for j in imgcf[32+i:32+i+8]])) for i in range(0,cc*8,8)])
     else: return '' 
+
 # --------------------------------------------------
 SPECIAL_BITS = '0100111101001011'
-main()
+#main()
+print(embed_text_to_image('ABBAAB','tux.png','tux_hello_x.png'))
+#print(get_embedded_text_from_image('tux_hidden_text.png'))
+#print(get_embedded_text_from_image('tux_hello_x.png'))
+#print(get_embedded_text_from_image('5x5_A.png'))
+#print(get_embedded_text_from_image('5x5_AB.png'))
+#print(get_embedded_text_from_image('5x5_ABC.png'))

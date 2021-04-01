@@ -3,6 +3,7 @@
 
 import math
 import copy
+from typing import Collection
 import numpy
 from PIL import Image
 
@@ -57,14 +58,23 @@ def main():
     else:
         print('Try again, re-enter E or G')
 # --------------------------------------------------
-
-
-
+def convert(C,b):
+    if C%2 == 0: 
+        if b == 0: return C
+        else : return C+1
+    elif C%2 == 1:
+        if b == 0: return C-1
+        else : return C
 # --------------------------------------------------
 def embed_text_to_image(text, file_in, file_out):
-    pass
-
-
+    t2be = SPECIAL_BITS + int_to_bits(len(text)) + ''.join([char_to_bits(i) for i in text]) + SPECIAL_BITS
+    img = load_image(file_in)
+    imgcf = [k for i in clone_image(img) for j in i for k in j]
+    if len(imgcf) < 16+((8*len(t2be)+2)//3) : return False
+    for e in range(len(t2be)) : imgcf[e] = convert(int(imgcf[e]),int(t2be[e]))
+    imgoutpix = [[imgcf[i],imgcf[i+1],imgcf[i+2]] for i in range(0,len(imgcf),3)]
+    save_image([imgoutpix[e*len(img[0]):(e+1)*len(img[0])] for e in range(0,len(img))],file_out)
+    return True
 # --------------------------------------------------
 def get_embedded_text_from_image(file_in):
     pass
@@ -73,3 +83,5 @@ def get_embedded_text_from_image(file_in):
 # --------------------------------------------------
 SPECIAL_BITS = '0100111101001011'
 main()
+#print(embed_text_to_image('ABBA','tux.png','tux_hello_x.png'))
+#print(embed_text_to_image('hello','5x5_A.png','loltest.png'))

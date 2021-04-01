@@ -81,8 +81,8 @@ def get_embedded_text_from_image(file_in):
     imgcf = [k for i in clone_image(img) for j in i for k in j]
     if ''.join([str(i%2) for i in imgcf[:16]]) == SPECIAL_BITS : 
         cc = bits_to_int(''.join([str(i%2) for i in imgcf[16:32]]))
-        return ''.join([bits_to_char(''.join([str(j%2) for j in imgcf[32+i:32+i+8]])) for i in range(0,cc*8,8)])
-    else: return '' 
+        if ''.join([str(i%2) for i in imgcf[32+(8*cc):32+(8*cc)+16]]) == SPECIAL_BITS : return ''.join([bits_to_char(''.join([str(j%2) for j in imgcf[32+i:32+i+8]])) for i in range(0,cc*8,8)])
+    return '' 
 # --------------------------------------------------
 SPECIAL_BITS = '0100111101001011'
 main()

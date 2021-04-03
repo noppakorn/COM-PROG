@@ -69,7 +69,7 @@ def embed_text_to_image(text, file_in, file_out):
     t2be = SPECIAL_BITS + int_to_bits(len(text)) + ''.join([char_to_bits(i) for i in text]) + SPECIAL_BITS
     img = load_image(file_in)
     imgcf = [k for i in clone_image(img) for j in i for k in j]
-    if len(imgcf) < 16+math.ceil(8*len(t2be)/3) : return False
+    if len(imgcf) < len(t2be) : return False
     for e in range(len(t2be)) : imgcf[e] = convert(int(imgcf[e]),int(t2be[e]))
     imgoutpix = [[imgcf[i],imgcf[i+1],imgcf[i+2]] for i in range(0,len(imgcf),3)]
     save_image([imgoutpix[e*len(img[0]):(e+1)*len(img[0])] for e in range(0,len(img))],file_out)

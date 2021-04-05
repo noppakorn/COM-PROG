@@ -1,0 +1,11 @@
+# Prog-10: Steganography
+Testcases Disclaimer :
+	Hello, everyone. This is Meen.
+Today I am going to explain why I don't allow sending testcases to other people. 
+It is because it is my work and I can do anything I want with it.
+	But in all seriousness, It is because I don't want other people to benefits 
+from the work that I do for my beloved friends and I don't want other people to get an easy A 
+without doing anything.
+	So yeah, DBAA (Don't be an asshole) 
+and keep this testcases to yourself.
+        Love, Meen

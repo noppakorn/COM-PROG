@@ -68,21 +68,20 @@ def convert(C,b):
 def embed_text_to_image(text, file_in, file_out):
     t2be = SPECIAL_BITS + int_to_bits(len(text)) + ''.join([char_to_bits(i) for i in text]) + SPECIAL_BITS
     img = load_image(file_in)
-    imgcf = [k for i in clone_image(img) for j in i for k in j]
-    if len(imgcf) < len(t2be) : return False
+    imgcf = [k for i in img for j in i for k in j]
+    if len(imgcf) < len(t2be) or len(text) > 65535 : return False
     for e in range(len(t2be)) : imgcf[e] = convert(int(imgcf[e]),int(t2be[e]))
-    imgoutpix = [[imgcf[i],imgcf[i+1],imgcf[i+2]] for i in range(0,len(imgcf),3)]
+    imgoutpix = [imgcf[i:i+3] for i in range(0,len(imgcf),3)]
     save_image([imgoutpix[e*len(img[0]):(e+1)*len(img[0])] for e in range(0,len(img))],file_out)
-    if get_embedded_text_from_image(file_out) == text : return True
+    return True
 # --------------------------------------------------
 def get_embedded_text_from_image(file_in):
     img = load_image(file_in)
-    imgcf = [k for i in clone_image(img) for j in i for k in j]
+    imgcf = [k for i in img for j in i for k in j]
     if ''.join([str(i%2) for i in imgcf[:16]]) == SPECIAL_BITS : 
         cc = bits_to_int(''.join([str(i%2) for i in imgcf[16:32]]))
         if ''.join([str(i%2) for i in imgcf[32+(8*cc):32+(8*cc)+16]]) == SPECIAL_BITS : return ''.join([bits_to_char(''.join([str(j%2) for j in imgcf[32+i:32+i+8]])) for i in range(0,cc*8,8)])
     return '' 
 # --------------------------------------------------
 SPECIAL_BITS = '0100111101001011'
-#main()
-exec(open('Prog-10-test.py').read())
+main()

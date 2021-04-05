@@ -1,4 +1,6 @@
 import glob
+import time
+start = time.time()
 errors = []
 file_in = 'stressgene.png'
 print('----------Case 1----------')
@@ -23,8 +25,9 @@ for txt in glob.glob('*.txt'):
         assert embed_text_to_image(rtxt,file_in,'%s_%s.png' % (file_in[:-4],txt[:-4])) != True 
     except: 
         errors.append('Case 2 : ' + txt)
-print('---------------------------------------------------------')
+print('---------------------------------------------------------\nReport :')
 if len(errors) > 0 :
     print('Errors : ') 
     for i in errors : print(i)
 else : print('All tests passes! Say Thanks!')
+print('Execution Time :',time.time()-start, 'seconds')

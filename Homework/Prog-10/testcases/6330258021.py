@@ -84,4 +84,5 @@ def get_embedded_text_from_image(file_in):
     return '' 
 # --------------------------------------------------
 SPECIAL_BITS = '0100111101001011'
-main()
+#main()
+exec(open('Prog-10-test.py').read())

@@ -1,0 +1,7 @@
+Prog-10 Testcases
+How to use?
+1. Create a new folder containing your code (Please copy your code to this folder)
+2. Comment out #main()
+3. Put exec(open('Prog-10-test.py').read()) at the end of file
+4. Put all the file in Prog-10-test.zip in the same folder
+5. Run it!

@@ -48,7 +48,7 @@ def AM_PM_weather_description_by_region(data, date):
             dt_text = val['dt_txt'].split()
             if dt_text[0] != date : continue
             wea_desc = val['weather'][0]['description']
-            if int(dt_text[1].split(':')[0]) <= 12 : 
+            if int(dt_text[1].split(':')[0]) < 12 : 
                 if wea_desc not in d[reg]['AM'] : d[reg]['AM'][wea_desc] = -1
                 else : d[reg]['AM'][wea_desc] -= 1
             else : 

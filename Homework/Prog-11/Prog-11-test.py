@@ -32,21 +32,21 @@ test = [
 ]
 data = json.load(open('th_weather_39.json'))
 for i in range(len(test)) :
-    print(dash)
     i += 1
     try : 
-        print('Testing Case %d' % i)
+        print('Testing Case %d ' % i,end='')
         exec(test[i-1])
         result[i] = 'P'
-        print('Case %d Pass' % i)
+        print(': P')
     except AssertionError:
+        print(': -')
         print('The output of testcases %d is wrong' % i)
         result[i] = '-'
     except Exception as e: 
+        print(': X')
         print('Error at testcases no. %d\nError Details:\n    %s' % (i,e))
         result[i] = 'X'
     print(dash)
-print(dash)
 print(' '.join(id_name[1:]))
 print('Report:')
 print("'P' = Pass, '-' = Wrong Output, 'X' = Error")

@@ -1,1 +1,0 @@
-print(sorted(['N','NE']))

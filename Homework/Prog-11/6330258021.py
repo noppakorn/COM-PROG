@@ -55,7 +55,14 @@ def AM_PM_weather_description_by_region(data, date):
                 else : 
                     if wea_desc not in d[reg]['PM'] : d[reg]['PM'][wea_desc] = -1
                     else : d[reg]['PM'][wea_desc] -= 1
-    return {key:{'AM' : sorted([(y,x) for x,y in values['AM'].items()])[0][1], 'PM' : sorted([(y,x) for x,y in values['PM'].items()])[0][1]} for key,values in sorted(d.items())}
+    out = {}
+    for key,values in sorted(d.items()):
+        out[key] = {}
+        if len(values['AM']) > 0 :
+            out[key]['AM'] = sorted([(y,x) for x,y in values['AM'].items()])[0][1]
+        if len(values['PM']) > 0 :
+            out[key]['PM'] = sorted([(y,x) for x,y in values['PM'].items()])[0][1]
+    return out
 
 def most_varied_weather_provinces(data):
     d = {}

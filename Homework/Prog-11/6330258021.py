@@ -37,7 +37,7 @@ def max_rain_in_3h_periods(data, region, date):
                     hour = int(dt_text[1].split(':')[0])
                     if hour not in d : d[hour] = [val['rain']['3h']]
                     else : d[hour].append(val['rain']['3h'])
-    return sorted([(key,max(values)) for key,values in d.items()])
+    return sorted([(key,max(d[key])) if key in d else (key,0.0) for key in range(0,24,3)])
         
 def AM_PM_weather_description_by_region(data, date):
     d = {}

@@ -47,22 +47,24 @@ def AM_PM_weather_description_by_region(data, date):
         for val in values['list']:
             dt_text = val['dt_txt'].split()
             if dt_text[0] != date : continue
-            wea_desc = val['weather'][0]['description']
-            if int(dt_text[1].split(':')[0]) < 12 : 
-                if wea_desc not in d[reg]['AM'] : d[reg]['AM'][wea_desc] = -1
-                else : d[reg]['AM'][wea_desc] -= 1
-            else : 
-                if wea_desc not in d[reg]['PM'] : d[reg]['PM'][wea_desc] = -1
-                else : d[reg]['PM'][wea_desc] -= 1
+            for wea in val['weather'] :
+                wea_desc = wea['description']
+                if int(dt_text[1].split(':')[0]) < 12 : 
+                    if wea_desc not in d[reg]['AM'] : d[reg]['AM'][wea_desc] = -1
+                    else : d[reg]['AM'][wea_desc] -= 1
+                else : 
+                    if wea_desc not in d[reg]['PM'] : d[reg]['PM'][wea_desc] = -1
+                    else : d[reg]['PM'][wea_desc] -= 1
     return {key:{'AM' : sorted([(y,x) for x,y in values['AM'].items()])[0][1], 'PM' : sorted([(y,x) for x,y in values['PM'].items()])[0][1]} for key,values in sorted(d.items())}
 
 def most_varied_weather_provinces(data):
     d = {}
     for values in data.values():
         name = values['city']['name']
-        if name not in d : d[name] = [val['weather'][0]['description'] for val in values['list']]
-        else :
-            for val in values['list']: d[name].append(val['weather'][0]['description'])
+        if name not in d : d[name] = []
+        for val in values['list']:
+            for wea in val['weather'] :
+                d[name].append(wea['description'])
     cd = {}
     for i,j in sorted(d.items()):
         ls = len(set(j))

@@ -1,7 +1,7 @@
 import time
 import sys
 import json
-dash = '-'*50
+dash = '-'*60
 cfn = open(__file__).readlines()
 id_name = cfn[1].strip().split()
 print(dash)
@@ -28,7 +28,8 @@ test = [
     "assert average_temp_by_date(data, 'C') == [('2021-04-06',28.395740740740735),('2021-04-07', 28.821388888888887),('2021-04-08', 30.702083333333334),('2021-04-09', 31.940138888888896),('2021-04-10', 31.774027777777786),('2021-04-11', 30.828333333333333)]",
     "assert max_rain_in_3h_periods(data, 'ALL', '2021-04-07') == [(0, 3.52),(3, 4.81),(6, 5.66),(9, 1.45),(12, 10.68),(15, 13.35),(18, 3.66),(21, 4.64)]",
     "assert AM_PM_weather_description_by_region(data, '2021-04-09') == {'C': {'AM': 'few clouds','PM': 'light rain'},'E': {'AM': 'broken clouds', 'PM': 'light rain'},'N': {'AM': 'clear sky','PM': 'few clouds'},'NE': {'AM': 'scattered clouds', 'PM': 'broken clouds'},'S': {'AM': 'light rain', 'PM': 'light rain'},'W': {'AM': 'scattered clouds', 'PM': 'broken clouds'}}",
-    "assert most_varied_weather_provinces(data) == {'Phichit', 'Ratchaburi'}"
+    "assert most_varied_weather_provinces(data) == {'Phichit', 'Ratchaburi'}",
+    "assert max_rain_in_3h_periods(data, 'C', '2021-04-08') == [(0, 4.32), (3, 0.12), (6, 0.0), (9, 0.0), (12, 0.12), (15, 0.26), (18, 0.0), (21, 0.12)]",
 ]
 data = json.load(open('th_weather_39.json'))
 for i in range(len(test)) :
@@ -50,7 +51,7 @@ for i in range(len(test)) :
 print(' '.join(id_name[1:]))
 print('Report:')
 print("'P' = Pass, '-' = Wrong Output, 'X' = Error")
-print('Notes : Case 1-5 is from PDF')
+print('Notes :\tCase 1-5 is from PDF\n\tCase 6 is max_rain_in_3h_periods')
 print('Result :', result)
 errors = {i:j for i,j in result.items() if j != 'P'}
 if len(errors) > 0 : 

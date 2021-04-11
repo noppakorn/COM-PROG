@@ -90,6 +90,7 @@ test = [
 print('Testing %d testcases' % len(test))
 print(dash)
 data = json.load(open('th_weather_39.json'))
+#for i in range(10):
 for i in range(len(test)) :
     i += 1
     try : 
@@ -113,8 +114,8 @@ notes = [
     'Case 1-2 is from top_K_max_temp_by_region',
     'Case 3-9 is average_temp_by_date',
     'Case 10-51 is max_rain_in_3h_periods',
-    'Case 51-56 is AM_PM_weather_description_by_region',
-    'Case 57 is most_varied_weather_provinces',
+    'Case 52-57 is AM_PM_weather_description_by_region',
+    'Case 58 is most_varied_weather_provinces',
 ]
 print('Notes:')
 for i in notes : print('\t'+i)

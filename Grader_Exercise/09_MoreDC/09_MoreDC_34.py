@@ -16,12 +16,47 @@ def pattern3( N ):
     return l
     
 def pattern4( N ):
-    pass
-
+    l = []
+    start = 0
+    for i in range(N):
+        row = []
+        c = 0
+        while c < N - i :
+            start += 1 + c + i
+            row.append(start)
+            c += 1
+        if len(row) < N :
+            row = [0]*(N-len(row)) + row
+        l.append(row)
+        start = row[i] - 1
+    return l
+            
 def pattern5( N ):
-    pass
+    l = []
+    start = 1
+    for i in range(N):
+        row = []
+        c = 0
+        while c < N - i :
+            row.append(start)
+            start += N - c
+            c += 1
+        if len(row) < N :
+                row = [0]*(N-len(row)) + row
+        l.append(row)
+        start = row[i] + 1
+    return l
 
 def pattern6( N ):
-    pass
+    l = [[0]*N for i in range(N)]
+    c = 0
+    for j in l:
+        for k in range(c,N):
+            ele = c + 1
+            j[k]= 
+        c += 1
+    return l
 
-exec(input().strip()) 
+
+print(pattern6(5))
+#exec(input().strip()) 

@@ -15,7 +15,7 @@ def top_K_max_temp_by_region(data, K):
             for j in values['list']:
                 d[reg].append((-j['main']['temp'],name,j['dt_txt']))
     for e in d: d[e].sort()
-    return {reg:[(-val[0],val[1],val[2]) for val in values[:min(len(values),K)]] for reg,values in sorted(d.items())}
+    return {reg:[(-val[0],val[1],val[2]) for val in values[:K]] for reg,values in sorted(d.items())}
          
 def average_temp_by_date(data, region):
     d = {}

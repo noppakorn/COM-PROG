@@ -39,11 +39,11 @@ def most_similar_province_pair(data):
 
 def most_similar_in_period(data, province, beg_date, end_date):
     dates = data['dates']
-    prov = data['province_names']
-    prov_no = prov[prov != province]
-    dr = dates[np.argmax(dates == beg_date):np.argmax(dates == end_date)+1]
+    dr = dates[(data['dates'] >= beg_date) & (data['dates'] <= end_date)]
     wr = np.arange(0,dates.shape[0]-dr.shape[0]+1)
     windows = np.arange(0,dr.shape[0]) + wr.reshape(wr.shape[0],1)
+    prov = data['province_names']
+    prov_no = prov[prov != province]
     tile_windows = np.array((windows,)*(prov_no.shape[0])).reshape(prov_no.shape[0]*windows.shape[0],windows.shape[1])
     tile_prov = np.array((prov_no,)*(windows.shape[0])).reshape(prov_no.shape[0]*windows.shape[0])
     repeat_prov = tile_prov.reshape(windows.shape[0],prov_no.shape[0]).T.reshape(prov_no.shape[0]*windows.shape[0])

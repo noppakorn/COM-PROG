@@ -18,7 +18,7 @@ def max_new_cases_date(data):
     return (data['dates'][np.argmax(su)],np.max(su))
 
 def max_new_cases_province(data, beg_date, end_date):
-    sum_by_prov = np.sum(data['new_cases'][:,np.argmax(data['dates'] == beg_date):np.argmax(data['dates'] == end_date)+1],axis=1)
+    sum_by_prov = np.sum(data['new_cases'][:,(data['dates'] >= beg_date) & (data['dates'] <= end_date)],axis=1)
     return (data['province_names'][np.argmax(sum_by_prov)],np.max(sum_by_prov))
 
 def max_new_cases_province_by_dates(data):
@@ -35,33 +35,32 @@ def most_similar_province_pair(data):
     ndata = data['norm_data']
     eprov = ndata[np.repeat(np.arange(0,ndata.shape[0]),ndata.shape[0])]
     nA = np.array((ndata,)*(ndata.shape[0])).reshape(ndata.shape[0]**2,ndata.shape[1])
-    all_sum_square = np.sum((nA-eprov)**2,axis=1)[tile_prov != repeat_prov]
-    return repeat_prov[tile_prov != repeat_prov][np.argmin(all_sum_square)],tile_prov[tile_prov != repeat_prov][np.argmin(all_sum_square)]
+    lindex = np.argmin(np.sum((nA-eprov)**2,axis=1)[tile_prov != repeat_prov])
+    return repeat_prov[tile_prov != repeat_prov][lindex],tile_prov[tile_prov != repeat_prov][lindex]
 
 def most_similar_in_period(data, province, beg_date, end_date):
     dates = data['dates']
+    prov = data['province_names']
+    prov_no = prov[prov != province]
     dr = dates[np.argmax(dates == beg_date):np.argmax(dates == end_date)+1]
     wr = np.arange(0,dates.shape[0]-dr.shape[0]+1)
     windows = np.arange(0,dr.shape[0]) + wr.reshape(wr.shape[0],1)
-    sdata = data['norm_data'][:,windows]
-    ndata_prov = data['new_cases'][data['province_names'] == province][:,np.argmax(dates == beg_date):np.argmax(dates == end_date)+1]
-    print(ndata_prov)
-    sum_sq_by_dr = np.sum((sdata - ndata_prov)**2,axis=1)
-    print(sdata.shape)
-    print(ndata_prov.shape)
-    print(sum_sq_by_dr)
-    return 'Fin'
-    
+    tile_windows = np.array((windows,)*(prov_no.shape[0])).reshape(prov_no.shape[0]*windows.shape[0],windows.shape[1])
+    tile_prov = np.array((prov_no,)*(windows.shape[0])).reshape(prov_no.shape[0]*windows.shape[0])
+    repeat_prov = tile_prov.reshape(windows.shape[0],prov_no.shape[0]).T.reshape(prov_no.shape[0]*windows.shape[0])
+    sdata = data['norm_data'][prov != province][:,windows]
+    ndata_prov = data['norm_data'][data['province_names'] == province,(data['dates'] >= beg_date) & (data['dates'] <= end_date)]
+    sum_sq_by_dr = np.sum((sdata - ndata_prov)**2,axis=2)
+    ind = np.argmin(sum_sq_by_dr.reshape(sum_sq_by_dr.shape[0]*sum_sq_by_dr.shape[1]))
+    return repeat_prov[ind],dates[tile_windows[ind]][0],dates[tile_windows[ind]][-1]
 
 def main():
     data = read_data('TH_20210401_20210416.csv')
-    #data = read_data('test.csv')
-    #print(max_new_cases_date(data))
-    #print(max_new_cases_province(data, '2021-04-10', '2021-04-13'))
-    #print(max_new_cases_province_by_dates(data))
-    #print(most_similar(data, 'กรุงเทพมหานคร'))
-    #print(most_similar_province_pair(data))
-    print(most_similar_in_period(data, 'กรุงเทพมหานคร', '2021-04-15', '2021-04-16' ))
+    print(max_new_cases_date(data))
+    print(max_new_cases_province(data, '2021-04-10', '2021-04-13'))
+    print(max_new_cases_province_by_dates(data))
+    print(most_similar(data, 'กรุงเทพมหานคร'))
+    print(most_similar_province_pair(data))
     print(most_similar_in_period(data, 'กรุงเทพมหานคร', '2021-04-05', '2021-04-09' ))
     print(most_similar_in_period(data, 'กรุงเทพมหานคร', '2021-04-01', '2021-04-16' ))
     return

@@ -2,7 +2,6 @@
 # 6330258021 Noppakorn Jiravaranun
 
 import numpy as np
-from numpy.lib.shape_base import tile
 
 def read_data(filename):
     d = np.loadtxt(filename, delimiter=",", encoding='utf-8', dtype=str)

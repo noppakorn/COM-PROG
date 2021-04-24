@@ -21,7 +21,7 @@ def max_new_cases_province(data, beg_date, end_date):
     return (data['province_names'][np.argmax(sum_by_prov)],np.max(sum_by_prov))
 
 def max_new_cases_province_by_dates(data):
-    return np.array([data['dates'],data['province_names'][np.argmax(data['new_cases'],axis=0)],np.max(data['new_cases'],axis=0)]).T
+    return np.array([data['dates'],data['province_names'][np.argmax(data['new_cases'],axis=0)],np.max(data['new_cases'],axis=0)],dtype=object).T
 
 def most_similar(data, province):
     sig_sq = np.sum((data['norm_data'] - data['norm_data'][data['province_names'] == province])**2,axis=1)[data['province_names'] != province]

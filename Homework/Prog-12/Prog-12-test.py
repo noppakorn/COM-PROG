@@ -1,10 +1,15 @@
 import time
 import sys
 dash = '-'*60
-cfn = open(__file__).readlines()
-id_name = cfn[1].strip().split()
 print(dash)
 print('Prog-12: COVID-19: The Latest Wave testcases by Meen')
+try : cfn = open(__file__).readlines()
+except :
+    print(dash)
+    print('Please remove everything from main() and remove all thai words from your code.')
+    print(dash)
+    sys.exit(0)
+id_name = cfn[1].strip().split()
 try : print('Name:',id_name[2],id_name[3])
 except:
     print(dash)
@@ -16,11 +21,10 @@ id = id_name[1]
 print('ID:',id)
 if len(id) != 10 or __file__[-13:-3] != id :
     print('----- Check your id and File Name -----')
-    sys.exit()
+    sys.exit(0)
 print('Please Check if your information is correct')
 print(dash)
 time.sleep(1)
-
 for i in range(len(cfn)) :
     if 'for' in cfn[i] or 'while' in cfn[i]: 
         print('!'*60)
@@ -29,10 +33,6 @@ for i in range(len(cfn)) :
         sys.exit(0)
 start = time.time()
 result = {}
-
-
-
-
 # The Case number is corresponds with linenumber-40
 # For example Case 1 is line 41, Case 2 is line 42 and so on
 # You can copy that entire line and paste it in your code and then remove the " sign 
@@ -283,9 +283,9 @@ print('Notes:')
 for i in notes : print('\t'+i)
 print('Result: ')
 for i in range(1,len(result)+1):
-    if i % 7 == 1 : print('\t%02d: %s' % (i,result[i]),end='')
-    else : print(' %02d: %s' % (i,result[i]),end='')
-    if i % 7 == 0 : print()
+    if i % 6 == 1 : print('\t%03d: %s' % (i,result[i]),end='')
+    else : print(' %03d: %s' % (i,result[i]),end='')
+    if i % 6 == 0 : print()
     elif i == len(result) : print()
     else : print(',',end='')
 print("'P' = Pass, '-' = Wrong Output, 'X' = Error")

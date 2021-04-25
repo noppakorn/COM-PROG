@@ -3,14 +3,16 @@ import sys
 dash = '-'*60
 print(dash)
 print('Prog-12: COVID-19: The Latest Wave testcases by Meen')
-try : cfn = open(__file__).readlines()
+try : 
+    cfn = open(__file__).readlines()
 except :
     print(dash)
-    print('Please remove everything from main() and remove all thai words from your code.')
+    print('Please remove everything from main() and remove all Thai character(s) from your code.')
     print(dash)
     sys.exit(0)
 id_name = cfn[1].strip().split()
-try : print('Name:',id_name[2],id_name[3])
+try :
+    print('Name:',id_name[2],id_name[3])
 except:
     print(dash)
     print("Please add exec(open('%s').read())\nto the end of the main() function of your code." % __file__[-15:])
@@ -24,20 +26,21 @@ if len(id) != 10 or __file__[-13:-3] != id :
     sys.exit(0)
 print('Please Check if your information is correct')
 print(dash)
-time.sleep(1)
-for i in range(len(cfn)) :
-    if 'for' in cfn[i] or 'while' in cfn[i]: 
-        print('!'*60)
-        print('Loop found at line no. %d. Please recheck' % i)
-        print('!'*60)
-        sys.exit(0)
 start = time.time()
 result = {}
+
+
+
+
+
 # The Case number is corresponds with linenumber-40
 # For example Case 1 is line 41, Case 2 is line 42 and so on
 # You can copy that entire line and paste it in your code and then remove the " sign 
 # from the front and back assert just means check if the statement is True
 test = [
+    "assert max_new_cases_date(data) == ('2021-04-16', 1577)",
+    "assert (max_new_cases_province_by_dates(data) == np.array([['2021-04-01','Samut Sakhon',11],['2021-04-02','Bangkok',20],['2021-04-03','Bangkok',32],['2021-04-04','Bangkok',35],['2021-04-05','Narathiwat',94],['2021-04-06','Bangkok',156],['2021-04-07','Bangkok',216],['2021-04-08','Narathiwat',146],['2021-04-09','Bangkok',268],['2021-04-10','Bangkok',185],['2021-04-11','Bangkok',236],['2021-04-12','Chiang Mai',246],['2021-04-13','Chiang Mai',251],['2021-04-14','Bangkok',351],['2021-04-15','Bangkok',409],['2021-04-16','Bangkok',312]],dtype=object)).all()",
+    "assert most_similar_province_pair(data) == ('Ranong', 'Satun')",
     "assert max_new_cases_province(data,'2021-04-01','2021-04-01') == ('Samut Sakhon', 11)",
     "assert max_new_cases_province(data,'2021-04-01','2021-04-02') == ('Bangkok', 27)",
     "assert max_new_cases_province(data,'2021-04-01','2021-04-03') == ('Bangkok', 59)",
@@ -251,7 +254,6 @@ test = [
     "assert most_similar(data,'Loei') == 'Prachinburi'",
     "assert most_similar(data,'Phrae') == 'Phayao'",
     "assert most_similar(data,'Mae Hong Son') == 'Nakhon Sawan'",
-
 ]
 print('Testing %d testcases' % len(test))
 print(dash)
@@ -276,22 +278,19 @@ for i in range(len(test)) :
 print(' '.join(id_name[1:]))
 print('Report:')
 notes = [
-    'Case 1-136 is from max_new_cases_province',
-    'Case 137-213 is most_similar'
+    'Case 1 is max_new_cases_date',
+    'Case 2 is max_new_cases_province_by_dates',
+    'Case 3 is most_similar_province_pair',
+    'Case 4-139 is from max_new_cases_province',
+    'Case 140-216 is most_similar',
 ]
 print('Notes:')
 for i in notes : print('\t'+i)
-print('Result: ')
-for i in range(1,len(result)+1):
-    if i % 6 == 1 : print('\t%03d: %s' % (i,result[i]),end='')
-    else : print(' %03d: %s' % (i,result[i]),end='')
-    if i % 6 == 0 : print()
-    elif i == len(result) : print()
-    else : print(',',end='')
 print("'P' = Pass, '-' = Wrong Output, 'X' = Error")
 errors = {i:j for i,j in result.items() if j != 'P'}
 print(dash)
 if len(errors) > 0 : 
+    print('Errors Count :',len(errors))
     print('Errors :', errors)
     print('Go fix your error(s) and try again. Good Luck!')
 else : print('All tests passes! Say Thanks to Meen!')

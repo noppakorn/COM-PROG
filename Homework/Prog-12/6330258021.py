@@ -54,5 +54,6 @@ def most_similar_in_period(data, province, beg_date, end_date):
     return repeat_prov[ind],dates[tile_windows[ind]][0],dates[tile_windows[ind]][-1]
 
 def main():
+    exec(open('Prog-12-eval.py').read())
     return
 main()
